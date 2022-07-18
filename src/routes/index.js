@@ -65,7 +65,7 @@ export default function Router() {
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
-        { path: 'app', element: <GeneralApp /> },
+        // { path: 'app', element: <GeneralApp /> },
         // { path: 'ecommerce', element: <GeneralEcommerce /> },
         // { path: 'analytics', element: <GeneralAnalytics /> },
         // { path: 'booking', element: <GeneralBooking /> },
@@ -175,7 +175,7 @@ const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 // DASHBOARD
 
 // GENERAL
-const GeneralApp = Loadable(lazy(() => import('../pages/dashboard/GeneralApp')));
+// const GeneralApp = Loadable(lazy(() => import('../pages/dashboard/GeneralApp')));
 // const GeneralEcommerce = Loadable(lazy(() => import('../pages/dashboard/GeneralEcommerce')));
 // const GeneralAnalytics = Loadable(lazy(() => import('../pages/dashboard/GeneralAnalytics')));
 // const GeneralBooking = Loadable(lazy(() => import('../pages/dashboard/GeneralBooking')));
