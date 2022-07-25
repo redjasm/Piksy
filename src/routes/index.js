@@ -67,8 +67,8 @@ export default function Router() {
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         // { path: 'app', element: <GeneralApp /> },
         // { path: 'ecommerce', element: <GeneralEcommerce /> },
-        // { path: 'analytics', element: <GeneralAnalytics /> },
-        // { path: 'booking', element: <GeneralBooking /> },
+        { path: 'analytics', element: <GeneralAnalytics /> },
+        { path: 'booking', element: <GeneralBooking /> },
 
         /* {
           path: 'e-commerce',
@@ -82,7 +82,7 @@ export default function Router() {
             { path: 'checkout', element: <EcommerceCheckout /> },
           ],
         }, */
-        /* {
+        {
           path: 'user',
           children: [
             { element: <Navigate to="/dashboard/user/profile" replace />, index: true },
@@ -93,7 +93,7 @@ export default function Router() {
             { path: ':name/edit', element: <UserCreate /> },
             { path: 'account', element: <UserAccount /> },
           ],
-        }, */
+        },
         /* {
           path: 'invoice',
           children: [
@@ -177,8 +177,8 @@ const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 // GENERAL
 // const GeneralApp = Loadable(lazy(() => import('../pages/dashboard/GeneralApp')));
 // const GeneralEcommerce = Loadable(lazy(() => import('../pages/dashboard/GeneralEcommerce')));
-// const GeneralAnalytics = Loadable(lazy(() => import('../pages/dashboard/GeneralAnalytics')));
-// const GeneralBooking = Loadable(lazy(() => import('../pages/dashboard/GeneralBooking')));
+const GeneralAnalytics = Loadable(lazy(() => import('../pages/dashboard/GeneralAnalytics')));
+const GeneralBooking = Loadable(lazy(() => import('../pages/dashboard/GeneralBooking')));
 
 // ECOMMERCE
 /* const EcommerceShop = Loadable(lazy(() => import('../pages/dashboard/EcommerceShop')));
@@ -200,11 +200,11 @@ const BlogPost = Loadable(lazy(() => import('../pages/dashboard/BlogPost')));
 const BlogNewPost = Loadable(lazy(() => import('../pages/dashboard/BlogNewPost'))); */
 
 // USER
-/* const UserProfile = Loadable(lazy(() => import('../pages/dashboard/UserProfile')));
+const UserProfile = Loadable(lazy(() => import('../pages/dashboard/UserProfile')));
 const UserCards = Loadable(lazy(() => import('../pages/dashboard/UserCards')));
 const UserList = Loadable(lazy(() => import('../pages/dashboard/UserList')));
 const UserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
-const UserCreate = Loadable(lazy(() => import('../pages/dashboard/UserCreate'))); */
+const UserCreate = Loadable(lazy(() => import('../pages/dashboard/UserCreate')));
 
 // APP
 // const Chat = Loadable(lazy(() => import('../pages/dashboard/Chat')));

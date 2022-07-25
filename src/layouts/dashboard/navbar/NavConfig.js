@@ -29,19 +29,19 @@ const ICONS = {
 const navConfig = [
   // GENERAL
   // ----------------------------------------------------------------------
-  /* {
+  {
     subheader: 'general',
     items: [
       // { title: 'app', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard },
       // { title: 'ecommerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce },
-      // { title: 'analytics', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
-      // { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
+      { title: 'analytics', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
+      { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
     ],
-  }, */
+  },
 
   // MANAGEMENT
   // ----------------------------------------------------------------------
-  /* {
+  {
     subheader: 'management',
     items: [
       // USER
@@ -59,7 +59,7 @@ const navConfig = [
         ],
       },
 
-      // E-COMMERCE
+      /* // E-COMMERCE
       {
         title: 'ecommerce',
         path: PATH_DASHBOARD.eCommerce.root,
@@ -97,10 +97,10 @@ const navConfig = [
           { title: 'post', path: PATH_DASHBOARD.blog.demoView },
           { title: 'create', path: PATH_DASHBOARD.blog.new },
         ],
-      },
+      }, */
     ],
-  }, */
-
+  },
+  
   // APP
   // ----------------------------------------------------------------------
   {
