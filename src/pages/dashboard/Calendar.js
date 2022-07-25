@@ -10,7 +10,14 @@ import { useState, useRef, useEffect } from 'react';
 import { Card, Button, Container, DialogTitle } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from '../../redux/slices/calendar';
+import {
+  getEvents,
+  openModal,
+  closeModal,
+  updateEvent,
+  selectEvent,
+  selectRange,
+} from '../../redux/slices/calendar';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -41,7 +48,7 @@ export default function Calendar() {
 
   const isDesktop = useResponsive('up', 'sm');
 
-  const calendarRef = useRef(null);
+  const calendarRef = useRef(null); 
 
   const [date, setDate] = useState(new Date());
 
@@ -156,7 +163,7 @@ export default function Calendar() {
         <HeaderBreadcrumbs
           heading="Calendar"
           links={[{ name: 'Dashboard', href: PATH_DASHBOARD.root }, { name: 'Calendar' }]}
-          moreLink="https://fullcalendar.io/docs/react"
+          // moreLink="https://fullcalendar.io/docs/react"
           action={
             <Button
               variant="contained"

@@ -10,6 +10,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Stack, Button, Tooltip, TextField, IconButton, DialogActions } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { MobileDateTimePicker } from '@mui/x-date-pickers';
+// firebase
+import { initializeApp } from 'firebase/app';
+import { query, onSnapshot, getFirestore, addDoc, setDoc, collection, orderBy, startAt, endAt } from 'firebase/firestore';
+import { FIREBASE_API } from '../../../config';
 // redux
 import { useDispatch } from '../../../redux/store';
 import { createEvent, updateEvent, deleteEvent } from '../../../redux/slices/calendar';
@@ -17,6 +21,12 @@ import { createEvent, updateEvent, deleteEvent } from '../../../redux/slices/cal
 import Iconify from '../../../components/Iconify';
 import { ColorSinglePicker } from '../../../components/color-utils';
 import { FormProvider, RHFTextField, RHFSwitch } from '../../../components/hook-form';
+
+// ----------------------------------------------------------------------
+// firebase constants
+const app = initializeApp(FIREBASE_API);
+
+const db = getFirestore(app);
 
 // ----------------------------------------------------------------------
 
@@ -93,9 +103,12 @@ export default function CalendarForm({ event, range, onCancel }) {
       if (event.id) {
         dispatch(updateEvent(event.id, newEvent));
         enqueueSnackbar('Update success!');
+        setDoc(collection(db, "DanielTestEvents"), newEvent);
       } else {
         enqueueSnackbar('Create success!');
         dispatch(createEvent(newEvent));
+        // test firebase event send
+        addDoc(collection(db, "DanielTestEvents"), newEvent);
       }
       onCancel();
       reset();
