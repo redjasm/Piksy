@@ -1,7 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 // firebase
 import { initializeApp } from 'firebase/app';
-import { query, onSnapshot, getFirestore, addDoc, getDocs, collection, orderBy, startAt, endAt } from 'firebase/firestore';
+import {
+  query,
+  onSnapshot,
+  getFirestore,
+  addDoc,
+  getDocs,
+  collection,
+  orderBy,
+  startAt,
+  endAt,
+} from 'firebase/firestore';
 import { FIREBASE_API } from '../../config';
 // utils
 import axios from '../../utils/axios';
@@ -113,11 +123,12 @@ export function getEvents() {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
+      const events = [];
       (await getDocs(query(collection(db, "DanielTestEvents")))).forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        dispatch(slice.actions.getEventsSuccess(doc.data()));
+        events.push(doc.data());
       });
-      // const response = await axios.get('/api/calendar/events'); // get from api
+      dispatch(slice.actions.getEventsSuccess(events));
+      // const response = await axios.get('/api/calendar/events');
       // dispatch(slice.actions.getEventsSuccess(response.data.events));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
