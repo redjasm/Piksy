@@ -1,3 +1,5 @@
+FROM node:16 as build-deps
+
 ARG GENERATE_SOURCEMAP
 ARG PORT
 ARG REACT_APP_HOST_API_KEY
@@ -14,7 +16,8 @@ ARG REACT_APP_AWS_COGNITO_CLIENT_ID
 ARG REACT_APP_AUTH0_DOMAIN
 ARG REACT_APP_AUTH0_CLIENT_ID
 
-FROM node:16 as build-deps
+RUN echo $REACT_APP_HOST_API_KEY
+
 WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
 RUN yarn global add serve
