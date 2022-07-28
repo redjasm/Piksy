@@ -1,5 +1,4 @@
 FROM node:16 as build-deps
-
 ARG GENERATE_SOURCEMAP
 ARG PORT
 ARG REACT_APP_HOST_API_KEY
@@ -15,14 +14,13 @@ ARG REACT_APP_AWS_COGNITO_USER_POOL_ID
 ARG REACT_APP_AWS_COGNITO_CLIENT_ID
 ARG REACT_APP_AUTH0_DOMAIN
 ARG REACT_APP_AUTH0_CLIENT_ID
-
-RUN echo $REACT_APP_HOST_API_KEY
-
 WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
-RUN yarn global add serve
 RUN yarn
 COPY . ./
 RUN yarn build
 
-CMD ["serve", "-s", "build"]
+FROM nginx:1.12-alpine
+COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
