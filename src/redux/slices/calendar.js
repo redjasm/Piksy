@@ -11,6 +11,9 @@ import {
   orderBy,
   startAt,
   endAt,
+  deleteDoc,
+  updateDoc,
+  doc
 } from 'firebase/firestore';
 import { FIREBASE_API } from '../../config';
 // utils
@@ -21,9 +24,6 @@ import { dispatch } from '../store';
 // firebase constants
 const app = initializeApp(FIREBASE_API);
 const db = getFirestore(app);
-// firebase read
-// const q = query(collection(db, "DanielTestEvents"));
-// const querySnapshot = getDocs(query(collection(db, "DanielTestEvents")));
 // ----------------------------------------------------------------------
 const initialState = {
   isLoading: false,
@@ -125,11 +125,9 @@ export function getEvents() {
     try {
       const events = [];
       (await getDocs(query(collection(db, "DanielTestEvents")))).forEach((doc) => {
-        events.push(doc.data());
+        events.push({ ...doc.data(), id: doc.id });
       });
       dispatch(slice.actions.getEventsSuccess(events));
-      // const response = await axios.get('/api/calendar/events');
-      // dispatch(slice.actions.getEventsSuccess(response.data.events));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -142,11 +140,13 @@ export function createEvent(newEvent) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.post('/api/calendar/events/new', newEvent);
-      dispatch(slice.actions.createEventSuccess(response.data.event));
+      (await addDoc(collection(db, "DanielTestEvents"), newEvent));
+      // newEvent.id =  await doc().id;
+      dispatch(slice.actions.createEventSuccess(newEvent));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
+    // add doc.id to newEvent
   };
 }
 
@@ -156,11 +156,8 @@ export function updateEvent(eventId, updateEvent) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.post('/api/calendar/events/update', {
-        eventId,
-        updateEvent,
-      });
-      dispatch(slice.actions.updateEventSuccess(response.data.event));
+      await updateDoc(doc(db, "DanielTestEvents", `${eventId}` ), updateEvent);
+      dispatch(slice.actions.updateEventSuccess({ ...updateEvent, id: eventId }));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -173,7 +170,7 @@ export function deleteEvent(eventId) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      await axios.post('/api/calendar/events/delete', { eventId });
+      await deleteDoc(doc(db, "DanielTestEvents", `${eventId}` ))
       dispatch(slice.actions.deleteEventSuccess({ eventId }));
     } catch (error) {
       dispatch(slice.actions.hasError(error));

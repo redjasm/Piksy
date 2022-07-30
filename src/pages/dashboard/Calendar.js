@@ -125,9 +125,8 @@ export default function Calendar() {
     try {
       dispatch(
         updateEvent(event.id, {
-          allDay: event.allDay,
-          start: event.start,
-          end: event.end,
+          start: `${event.start.toISOString()}`,
+          end: `${event.end.toISOString()}`,
         })
       );
     } catch (error) {
@@ -139,9 +138,8 @@ export default function Calendar() {
     try {
       dispatch(
         updateEvent(event.id, {
-          allDay: event.allDay,
-          start: event.start,
-          end: event.end,
+          start: `${event.start.toISOString()}`,
+          end: `${event.end.toISOString()}`,
         })
       );
     } catch (error) {
@@ -186,6 +184,8 @@ export default function Calendar() {
               onChangeView={handleChangeView}
             />
             <FullCalendar
+              nowIndicator
+              allDaySlot={false}
               weekends
               editable
               droppable
