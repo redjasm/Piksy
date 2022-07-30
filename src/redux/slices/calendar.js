@@ -113,16 +113,11 @@ export function getEvents() {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      
       const events = [];
-      await getDocs(collection(db, 'DanielTestEvents')).then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          events.push({...doc.data(), id: doc.id});
-        });
+      (await getDocs(query(collection(db, "DanielTestEvents")))).forEach((doc) => {
+        events.push(doc.data());
       });
-
       dispatch(slice.actions.getEventsSuccess(events));
-
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
