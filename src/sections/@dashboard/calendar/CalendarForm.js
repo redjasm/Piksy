@@ -103,6 +103,8 @@ export default function CalendarForm({ event, range, onCancel }) {
         enqueueSnackbar('Create success!');
         dispatch(createEvent(newEvent));
       }
+
+
       onCancel();
       reset();
     } catch (error) {

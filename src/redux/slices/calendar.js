@@ -34,7 +34,7 @@ const initialState = {
   selectedRange: null,
 };
 
-const slice = createSlice({
+const slice = createSlice({ 
   name: 'calendar',
   initialState,
   reducers: {
@@ -151,7 +151,6 @@ export function createEvent(newEvent) {
 }
 
 // ----------------------------------------------------------------------
-
 export function updateEvent(eventId, updateEvent) {
   return async () => {
     dispatch(slice.actions.startLoading());
@@ -169,6 +168,7 @@ export function updateEvent(eventId, updateEvent) {
 export function deleteEvent(eventId) {
   return async () => {
     dispatch(slice.actions.startLoading());
+    console.log(eventId);
     try {
       await deleteDoc(doc(db, "DanielTestEvents", `${eventId}` ))
       dispatch(slice.actions.deleteEventSuccess({ eventId }));

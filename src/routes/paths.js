@@ -54,7 +54,7 @@ export const PATH_DASHBOARD = {
   }, */
   calendar: path(ROOTS_DASHBOARD, '/calendar'),
   /* kanban: path(ROOTS_DASHBOARD, '/kanban'), */
-  /* permissionDenied: path(ROOTS_DASHBOARD, '/permission-denied'), */
+  // permissionDenied: path(ROOTS_DASHBOARD, '/permission-denied'),
   user: {
     root: path(ROOTS_DASHBOARD, '/user'),
     new: path(ROOTS_DASHBOARD, '/user/new'),
