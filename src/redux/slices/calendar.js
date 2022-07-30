@@ -1,17 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 // firebase
 import { initializeApp } from 'firebase/app';
-import {
-  query,
-  onSnapshot,
-  getFirestore,
-  addDoc,
-  getDocs,
-  collection,
-  orderBy,
-  startAt,
-  endAt,
-} from 'firebase/firestore';
+import { query, onSnapshot, getFirestore, addDoc, updateDoc, getDocs, collection, orderBy, startAt, endAt, deleteDoc, doc } from 'firebase/firestore';
 import { FIREBASE_API } from '../../config';
 // utils
 import axios from '../../utils/axios';
@@ -19,8 +9,8 @@ import axios from '../../utils/axios';
 import { dispatch } from '../store';
 // ----------------------------------------------------------------------
 // firebase constants
-const app = initializeApp(FIREBASE_API);
-const db = getFirestore(app);
+const firebase = initializeApp(FIREBASE_API);
+const db = getFirestore(firebase);
 // firebase read
 // const q = query(collection(db, "DanielTestEvents"));
 // const querySnapshot = getDocs(query(collection(db, "DanielTestEvents")));
@@ -34,7 +24,7 @@ const initialState = {
   selectedRange: null,
 };
 
-const slice = createSlice({
+const slice = createSlice({ 
   name: 'calendar',
   initialState,
   reducers: {
@@ -128,8 +118,6 @@ export function getEvents() {
         events.push(doc.data());
       });
       dispatch(slice.actions.getEventsSuccess(events));
-      // const response = await axios.get('/api/calendar/events');
-      // dispatch(slice.actions.getEventsSuccess(response.data.events));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -142,8 +130,10 @@ export function createEvent(newEvent) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.post('/api/calendar/events/new', newEvent);
-      dispatch(slice.actions.createEventSuccess(response.data.event));
+      
+      await addDoc(collection(db, 'DanielTestEvents'), newEvent);
+      newEvent.id = await doc.id;
+      dispatch(slice.actions.createEventSuccess(newEvent));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -151,16 +141,15 @@ export function createEvent(newEvent) {
 }
 
 // ----------------------------------------------------------------------
-
 export function updateEvent(eventId, updateEvent) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.post('/api/calendar/events/update', {
-        eventId,
-        updateEvent,
-      });
-      dispatch(slice.actions.updateEventSuccess(response.data.event));
+
+      await updateDoc(doc(db, "DanielTestEvents", `${eventId}`), updateEvent); 
+
+      dispatch(slice.actions.updateEventSuccess( { ...updateEvent, id: eventId } ));
+
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -172,9 +161,12 @@ export function updateEvent(eventId, updateEvent) {
 export function deleteEvent(eventId) {
   return async () => {
     dispatch(slice.actions.startLoading());
+    console.log(eventId);
     try {
-      await axios.post('/api/calendar/events/delete', { eventId });
-      dispatch(slice.actions.deleteEventSuccess({ eventId }));
+
+      await deleteDoc(doc(db, "DanielTestEvents", `${eventId}`));
+      dispatch(slice.actions.deleteEventSuccess( { eventId } ));
+
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

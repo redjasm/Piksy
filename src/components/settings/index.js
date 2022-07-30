@@ -20,7 +20,7 @@ export default function ThemeSettings({ children }) {
         <ThemeLocalization>
           <ThemeRtlLayout>
             {children}
-            <SettingsDrawer />
+            {/* <SettingsDrawer /> */}
           </ThemeRtlLayout>
         </ThemeLocalization>
       </ThemeContrast>
