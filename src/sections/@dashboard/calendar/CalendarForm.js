@@ -10,35 +10,28 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Stack, Button, Tooltip, TextField, IconButton, DialogActions } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { MobileDateTimePicker } from '@mui/x-date-pickers';
-
-
-
-// firebase
-import { initializeApp } from 'firebase/app';
-import { query, onSnapshot, getFirestore, doc, addDoc, setDoc, updateDoc, deleteDoc, deleteField, collection, orderBy, startAt, endAt, getDocs } from 'firebase/firestore';
-import { FIREBASE_API } from '../../../config';
-
-
-
 // redux
 import { useDispatch } from '../../../redux/store';
 import { createEvent, updateEvent, deleteEvent } from '../../../redux/slices/calendar';
 // components
 import Iconify from '../../../components/Iconify';
 import { ColorSinglePicker } from '../../../components/color-utils';
-import { FormProvider, RHFTextField, RHFSwitch } from '../../../components/hook-form';
+import { FormProvider, RHFTextField, RHFSelect } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
-
-const app = initializeApp(FIREBASE_API);
-const db = getFirestore(app);
-
-
-
+const SERVCE_OPTIONS = [
+  { value: '', label: 'Select a service' },
+  { value: 'service1', label: 'Service 1' },
+  { value: 'service2', label: 'Service 2' },
+  { value: 'service3', label: 'Service 3' },
+  { value: 'service4', label: 'Service 4' },
+  { value: 'service5', label: 'Service 5' },
+  { value: 'service6', label: 'Service 6' },
+];
 const COLOR_OPTIONS = [
-  '#00AB55', // theme.palette.primary.main,
-  '#1890FF', // theme.palette.info.main,
-  '#54D62C', // theme.palette.success.main,
+  '#BBE9DE', // #00AB55 theme.palette.primary.main,
+  '#D5EFC2', // #1890FF theme.palette.info.main,
+  '#FBC9D2', // #54D62C theme.palette.success.main,
   '#FFC107', // theme.palette.warning.main,
   '#FF4842', // theme.palette.error.main
   '#04297A', // theme.palette.info.darker
@@ -49,8 +42,7 @@ const getInitialValues = (event, range) => {
   const _event = {
     title: '',
     description: '',
-    textColor: '#1890FF',
-    allDay: false,
+    textColor: '#BBE9DE',
     start: `${range ? new Date(range.start).toISOString() : new Date().toISOString()}`,
     end: `${range ? new Date(range.end).toISOString() : new Date().toISOString()}`,
   };
@@ -101,7 +93,6 @@ export default function CalendarForm({ event, range, onCancel }) {
         title: data.title,
         description: data.description,
         textColor: data.textColor,
-        allDay: data.allDay,
         start: data.start,
         end: data.end,
       };
@@ -140,10 +131,14 @@ export default function CalendarForm({ event, range, onCancel }) {
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} sx={{ p: 3 }}>
         <RHFTextField name="title" label="Title" />
+        {/* {Dropdown menu will fetch services} */}
+        <RHFSelect name="service" label="Service" control={SERVCE_OPTIONS} />
+
+        <RHFSelect name="customer" label="Customer" options={COLOR_OPTIONS} />
+
+        <RHFSelect name="employee" label="Employee" options={COLOR_OPTIONS} />
 
         <RHFTextField name="description" label="Description" multiline rows={4} />
-
-        <RHFSwitch name="allDay" label="All day" />
 
         <Controller
           name="start"

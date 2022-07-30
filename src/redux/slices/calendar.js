@@ -1,7 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 // firebase
 import { initializeApp } from 'firebase/app';
-import { query, onSnapshot, getFirestore, addDoc, updateDoc, getDocs, collection, orderBy, startAt, endAt, deleteDoc, doc } from 'firebase/firestore';
+import {
+  query,
+  onSnapshot,
+  getFirestore,
+  addDoc,
+  getDocs,
+  collection,
+  orderBy,
+  startAt,
+  endAt,
+  deleteDoc,
+  updateDoc,
+  doc
+} from 'firebase/firestore';
 import { FIREBASE_API } from '../../config';
 // utils
 import axios from '../../utils/axios';
@@ -9,11 +22,8 @@ import axios from '../../utils/axios';
 import { dispatch } from '../store';
 // ----------------------------------------------------------------------
 // firebase constants
-const firebase = initializeApp(FIREBASE_API);
-const db = getFirestore(firebase);
-// firebase read
-// const q = query(collection(db, "DanielTestEvents"));
-// const querySnapshot = getDocs(query(collection(db, "DanielTestEvents")));
+const app = initializeApp(FIREBASE_API);
+const db = getFirestore(app);
 // ----------------------------------------------------------------------
 const initialState = {
   isLoading: false,
@@ -115,7 +125,7 @@ export function getEvents() {
     try {
       const events = [];
       (await getDocs(query(collection(db, "DanielTestEvents")))).forEach((doc) => {
-        events.push(doc.data());
+        events.push({ ...doc.data(), id: doc.id });
       });
       dispatch(slice.actions.getEventsSuccess(events));
     } catch (error) {
@@ -130,13 +140,13 @@ export function createEvent(newEvent) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      
-      await addDoc(collection(db, 'DanielTestEvents'), newEvent);
-      newEvent.id = await doc.id;
+      (await addDoc(collection(db, "DanielTestEvents"), newEvent));
+      // newEvent.id =  await doc().id;
       dispatch(slice.actions.createEventSuccess(newEvent));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
+    // add doc.id to newEvent
   };
 }
 
@@ -145,11 +155,8 @@ export function updateEvent(eventId, updateEvent) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-
-      await updateDoc(doc(db, "DanielTestEvents", `${eventId}`), updateEvent); 
-
-      dispatch(slice.actions.updateEventSuccess( { ...updateEvent, id: eventId } ));
-
+      await updateDoc(doc(db, "DanielTestEvents", `${eventId}` ), updateEvent);
+      dispatch(slice.actions.updateEventSuccess({ ...updateEvent, id: eventId }));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -163,10 +170,8 @@ export function deleteEvent(eventId) {
     dispatch(slice.actions.startLoading());
     console.log(eventId);
     try {
-
-      await deleteDoc(doc(db, "DanielTestEvents", `${eventId}`));
-      dispatch(slice.actions.deleteEventSuccess( { eventId } ));
-
+      await deleteDoc(doc(db, "DanielTestEvents", `${eventId}` ))
+      dispatch(slice.actions.deleteEventSuccess({ eventId }));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
