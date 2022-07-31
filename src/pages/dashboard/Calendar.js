@@ -58,6 +58,12 @@ export default function Calendar() {
 
   const { events, isOpenModal, selectedRange } = useSelector((state) => state.calendar);
 
+  const businessHours = {
+    daysOfWeek: [1, 2, 3, 4, 5],
+    startTime: '08:00',
+    endTime: '18:00',
+  };
+
   useEffect(() => {
     dispatch(getEvents());
   }, [dispatch]);
@@ -206,6 +212,7 @@ export default function Calendar() {
               eventResize={handleResizeEvent}
               height={isDesktop ? 720 : 'auto'}
               plugins={[listPlugin, dayGridPlugin, timelinePlugin, timeGridPlugin, interactionPlugin]}
+              businessHours={businessHours}
             />
           </CalendarStyle>
         </Card>
