@@ -52,6 +52,12 @@ export default function Calendar() {
 
   const { events, isOpenModal, selectedRange } = useSelector((state) => state.calendar);
 
+  const businessHours = {
+    daysOfWeek: [1, 2, 3, 4, 5],
+    startTime: '08:00',
+    endTime: '18:00',
+  };
+
   const resources=[ 
     { id: 1, title: 'Sandra Jankins' },
     { id: 2, title: 'Kianna Franci' },
@@ -209,6 +215,7 @@ export default function Calendar() {
               eventClick={handleSelectEvent}
               eventResize={handleResizeEvent}
               height={isDesktop ? 720 : 'auto'}
+              businessHours={businessHours}
               plugins={[
                 listPlugin,
                 dayGridPlugin,
