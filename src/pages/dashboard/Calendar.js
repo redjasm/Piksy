@@ -52,7 +52,7 @@ export default function Calendar() {
 
   const [date, setDate] = useState(new Date());
 
-  const [view, setView] = useState(isDesktop ? 'dayGridMonth' : 'listWeek');
+  const [view, setView] = useState(isDesktop ? 'timeGridWeek' : 'listWeek');
 
   const selectedEvent = useSelector(selectedEventSelector);
 
@@ -66,7 +66,7 @@ export default function Calendar() {
     const calendarEl = calendarRef.current;
     if (calendarEl) {
       const calendarApi = calendarEl.getApi();
-      const newView = isDesktop ? 'dayGridMonth' : 'listWeek';
+      const newView = isDesktop ? 'timeGridWeek' : 'listWeek';
       calendarApi.changeView(newView);
       setView(newView);
     }
