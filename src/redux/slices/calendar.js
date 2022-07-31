@@ -156,7 +156,9 @@ export function updateEvent(eventId, updateEvent) {
     dispatch(slice.actions.startLoading());
     try {
       await updateDoc(doc(db, "DanielTestEvents", `${eventId}` ), updateEvent);
-      dispatch(slice.actions.updateEventSuccess({ ...updateEvent, id: eventId }));
+      dispatch(slice.actions.updateEventSuccess(updateEvent, ...updateEvent ));
+      // dispatch(slice.actions.updateEventSuccess({ ...updateEvent, id: eventId }));
+
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
