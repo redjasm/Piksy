@@ -1852,19 +1852,19 @@
   "resolved" "https://registry.npmjs.org/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.6.2.tgz"
   "version" "0.6.2"
 
-"@fullcalendar/common@~5.11.0":
-  "integrity" "sha512-gWjbMAnN1u73Oqlgjbyky7i+3bY0hvFSnGT0YBPx44n874AkQa9e9OU12PMLTMOPy0tXPb8DEwRelFQ7CJNbcw=="
-  "resolved" "https://registry.npmjs.org/@fullcalendar/common/-/common-5.11.0.tgz"
-  "version" "5.11.0"
+"@fullcalendar/common@~5.11.0", "@fullcalendar/common@~5.11.2":
+  "integrity" "sha512-2YBRs4IFrZlo7UL7hEHK+QgnuQnVIfwSspCOy0Qe+DtU2hu3myPrxsW0Tt/8RaoWsRndRDw5jeJzpjcVHDSSGQ=="
+  "resolved" "https://registry.npmjs.org/@fullcalendar/common/-/common-5.11.2.tgz"
+  "version" "5.11.2"
   dependencies:
     "tslib" "^2.1.0"
 
 "@fullcalendar/daygrid@^5.11.0", "@fullcalendar/daygrid@~5.11.0":
-  "integrity" "sha512-Ybh/dfHn/VL0qOVIRVyJc9I8oYiqqHl6xQONk8xXCe456QbPzAQLsAxpLLJLH+3smWNCfoQgvDKzR9e9XTzLMQ=="
-  "resolved" "https://registry.npmjs.org/@fullcalendar/daygrid/-/daygrid-5.11.0.tgz"
-  "version" "5.11.0"
+  "integrity" "sha512-WmR8EAOR8Y9wyxlCK2gBW6lG/dPSN37eM8L7vgc7YgrQE1knL7ISgaUnDfFUNBFztmLakO/ZpeQQFpz3pnJwXg=="
+  "resolved" "https://registry.npmjs.org/@fullcalendar/daygrid/-/daygrid-5.11.2.tgz"
+  "version" "5.11.2"
   dependencies:
-    "@fullcalendar/common" "~5.11.0"
+    "@fullcalendar/common" "~5.11.2"
     "tslib" "^2.1.0"
 
 "@fullcalendar/interaction@^5.11.0":
@@ -1883,12 +1883,12 @@
     "@fullcalendar/common" "~5.11.0"
     "tslib" "^2.1.0"
 
-"@fullcalendar/premium-common@~5.11.0":
-  "integrity" "sha512-XVLJwJQ26EhuglBM1flmrKtNt0BEUBHoazko/wvMiz5Yz17eABKQreFTidipOwjL3s74ifQzDoYpkQVn8TzpZQ=="
-  "resolved" "https://registry.npmjs.org/@fullcalendar/premium-common/-/premium-common-5.11.0.tgz"
-  "version" "5.11.0"
+"@fullcalendar/premium-common@~5.11.2":
+  "integrity" "sha512-T8kEIeToMY/zZafgPxv8tPJHQU6uqw8qygprs8+z4WSeE25a6YuDJfsUcA4SVB6DZS4Kb090YS2FCrT8wDkMkg=="
+  "resolved" "https://registry.npmjs.org/@fullcalendar/premium-common/-/premium-common-5.11.2.tgz"
+  "version" "5.11.2"
   dependencies:
-    "@fullcalendar/common" "~5.11.0"
+    "@fullcalendar/common" "~5.11.2"
     "tslib" "^2.1.0"
 
 "@fullcalendar/react@^5.11.1":
@@ -1899,13 +1899,34 @@
     "@fullcalendar/common" "~5.11.0"
     "tslib" "^2.1.0"
 
-"@fullcalendar/scrollgrid@~5.11.0":
-  "integrity" "sha512-OPwLGLr0YF2qQYa9K1vPIGsodfAqPnugcwKLwnkiLprC2UybnPaIXvY6xMAHyVWSiBaeJSmkQ0J8mZDmfKjdTw=="
-  "resolved" "https://registry.npmjs.org/@fullcalendar/scrollgrid/-/scrollgrid-5.11.0.tgz"
-  "version" "5.11.0"
+"@fullcalendar/resource-common@~5.11.2":
+  "integrity" "sha512-nFQsCG1/d4Lv5lyMvrJjsNejtjn8JqQnjiFYr8lB/RgQWw/1QkLhG6oWQXPuo1liem7LEtYfE/+GdNik6s+Tcw=="
+  "resolved" "https://registry.npmjs.org/@fullcalendar/resource-common/-/resource-common-5.11.2.tgz"
+  "version" "5.11.2"
   dependencies:
-    "@fullcalendar/common" "~5.11.0"
-    "@fullcalendar/premium-common" "~5.11.0"
+    "@fullcalendar/common" "~5.11.2"
+    "@fullcalendar/premium-common" "~5.11.2"
+    "tslib" "^2.1.0"
+
+"@fullcalendar/resource-timeline@^5.11.2":
+  "integrity" "sha512-8cY1h9CV9ZqWL9OMn8frYJNreAwK+BiN8g9g33SF2ygVXfTjqRNeyBpNFaMcH16jZg+9T/bwVPlfQaBRmd2lAg=="
+  "resolved" "https://registry.npmjs.org/@fullcalendar/resource-timeline/-/resource-timeline-5.11.2.tgz"
+  "version" "5.11.2"
+  dependencies:
+    "@fullcalendar/common" "~5.11.2"
+    "@fullcalendar/premium-common" "~5.11.2"
+    "@fullcalendar/resource-common" "~5.11.2"
+    "@fullcalendar/scrollgrid" "~5.11.2"
+    "@fullcalendar/timeline" "~5.11.2"
+    "tslib" "^2.1.0"
+
+"@fullcalendar/scrollgrid@~5.11.2":
+  "integrity" "sha512-DXXp2huJcfW58/BMEaf0awon73aWEDXpH5rcfqmSuzwzOsTtqrhrI10OQl5GiLpAoD0QoQ4q/Kvc35D8KnLI6g=="
+  "resolved" "https://registry.npmjs.org/@fullcalendar/scrollgrid/-/scrollgrid-5.11.2.tgz"
+  "version" "5.11.2"
+  dependencies:
+    "@fullcalendar/common" "~5.11.2"
+    "@fullcalendar/premium-common" "~5.11.2"
     "tslib" "^2.1.0"
 
 "@fullcalendar/timegrid@^5.11.0":
@@ -1917,14 +1938,14 @@
     "@fullcalendar/daygrid" "~5.11.0"
     "tslib" "^2.1.0"
 
-"@fullcalendar/timeline@^5.11.0":
-  "integrity" "sha512-2mASvwsXMR42Vlvwjnb5w0OvMDf8z2WCZXpLCd11lP/b+ZYOosCrJZZQWpzNfWYf7Y4Sqjo7q+YMPxnJqlichg=="
-  "resolved" "https://registry.npmjs.org/@fullcalendar/timeline/-/timeline-5.11.0.tgz"
-  "version" "5.11.0"
+"@fullcalendar/timeline@^5.11.0", "@fullcalendar/timeline@~5.11.2":
+  "integrity" "sha512-YbfQq/NGl9ITJvoSv1HMADyAhaGc2eMKK1DZY79jwrNbjNZweKAD2qFvo9MpRoobSLrz+Aki+uWx81CtaiDb6w=="
+  "resolved" "https://registry.npmjs.org/@fullcalendar/timeline/-/timeline-5.11.2.tgz"
+  "version" "5.11.2"
   dependencies:
-    "@fullcalendar/common" "~5.11.0"
-    "@fullcalendar/premium-common" "~5.11.0"
-    "@fullcalendar/scrollgrid" "~5.11.0"
+    "@fullcalendar/common" "~5.11.2"
+    "@fullcalendar/premium-common" "~5.11.2"
+    "@fullcalendar/scrollgrid" "~5.11.2"
     "tslib" "^2.1.0"
 
 "@grpc/grpc-js@^1.3.2":

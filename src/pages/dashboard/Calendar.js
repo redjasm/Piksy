@@ -4,20 +4,14 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import timelinePlugin from '@fullcalendar/timeline';
 import interactionPlugin from '@fullcalendar/interaction';
+import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 //
 import { useState, useRef, useEffect } from 'react';
 // @mui
 import { Card, Button, Container, DialogTitle } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import {
-  getEvents,
-  openModal,
-  closeModal,
-  updateEvent,
-  selectEvent,
-  selectRange,
-} from '../../redux/slices/calendar';
+import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from '../../redux/slices/calendar';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -48,7 +42,7 @@ export default function Calendar() {
 
   const isDesktop = useResponsive('up', 'sm');
 
-  const calendarRef = useRef(null); 
+  const calendarRef = useRef(null);
 
   const [date, setDate] = useState(new Date());
 
@@ -57,6 +51,16 @@ export default function Calendar() {
   const selectedEvent = useSelector(selectedEventSelector);
 
   const { events, isOpenModal, selectedRange } = useSelector((state) => state.calendar);
+
+  const resources=[ 
+    { id: 1, title: 'Sandra Jankins' },
+    { id: 2, title: 'Kianna Franci' },
+    { id: 3, title: 'Maiken Vaccaro' },
+    { id: 4, title: 'Livia Rhiel Madsen' },
+    { id: 5, title: 'Celina Philips' },
+    { id: 6, title: 'Dulce Troff' },
+    { id: 7, title: 'Renate Mango' }
+  ]
 
   useEffect(() => {
     dispatch(getEvents());
@@ -205,7 +209,16 @@ export default function Calendar() {
               eventClick={handleSelectEvent}
               eventResize={handleResizeEvent}
               height={isDesktop ? 720 : 'auto'}
-              plugins={[listPlugin, dayGridPlugin, timelinePlugin, timeGridPlugin, interactionPlugin]}
+              plugins={[
+                listPlugin,
+                dayGridPlugin,
+                timelinePlugin,
+                timeGridPlugin,
+                interactionPlugin,
+                resourceTimelinePlugin
+              ]}
+              resources={resources}
+              expandRows
             />
           </CalendarStyle>
         </Card>

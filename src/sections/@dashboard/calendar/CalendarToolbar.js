@@ -10,11 +10,12 @@ import useResponsive from '../../../hooks/useResponsive';
 import Iconify from '../../../components/Iconify';
 
 // ----------------------------------------------------------------------
-
 const VIEW_OPTIONS = [
   { value: 'dayGridMonth', label: 'Month', icon: 'ic:round-view-module' },
   { value: 'timeGridWeek', label: 'Week', icon: 'ic:round-view-week' },
   { value: 'timeGridDay', label: 'Day', icon: 'ic:round-view-day' },
+  { value: 'resourceTimeline', label: 'Timeline', icon: 'ic:round-view-list' },
+  { value: 'resourceTimelineWeek', label: 'Timeline Week', icon: 'ic:round-view-list' },
   { value: 'listWeek', label: 'Agenda', icon: 'ic:round-view-agenda' },
 ];
 
@@ -37,7 +38,7 @@ CalendarToolbar.propTypes = {
   onNextDate: PropTypes.func,
   onPrevDate: PropTypes.func,
   onChangeView: PropTypes.func,
-  view: PropTypes.oneOf(['dayGridMonth', 'timeGridWeek', 'timeGridDay', 'listWeek']),
+  view: PropTypes.oneOf(['dayGridMonth', 'timeGridWeek', 'timeGridDay', 'listWeek', 'resourceTimeline', 'resourceTimelineWeek']),
 };
 
 export default function CalendarToolbar({ date, view, onToday, onNextDate, onPrevDate, onChangeView }) {
