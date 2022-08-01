@@ -16,6 +16,7 @@ const VIEW_OPTIONS = [
   { value: 'timeGridDay', label: 'Day', icon: 'ic:round-view-day' },
   { value: 'resourceTimeline', label: 'Timeline', icon: 'ic:round-view-list' },
   { value: 'resourceTimelineWeek', label: 'Timeline Week', icon: 'ic:round-view-list' },
+  { value: 'customWeek', label: 'custom Week', icon: 'ic:round-view-list' },
   { value: 'listWeek', label: 'Agenda', icon: 'ic:round-view-agenda' },
 ];
 
@@ -38,7 +39,7 @@ CalendarToolbar.propTypes = {
   onNextDate: PropTypes.func,
   onPrevDate: PropTypes.func,
   onChangeView: PropTypes.func,
-  view: PropTypes.oneOf(['dayGridMonth', 'timeGridWeek', 'timeGridDay', 'listWeek', 'resourceTimeline', 'resourceTimelineWeek']),
+  view: PropTypes.oneOf(['dayGridMonth', 'timeGridWeek', 'timeGridDay', 'listWeek', 'resourceTimeline', 'resourceTimelineWeek', 'customWeek']),
 };
 
 export default function CalendarToolbar({ date, view, onToday, onNextDate, onPrevDate, onChangeView }) {

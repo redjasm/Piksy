@@ -40,6 +40,7 @@ const COLOR_OPTIONS = [
 
 const getInitialValues = (event, range) => {
   const _event = {
+    resourceId: 1,
     title: '',
     description: '',
     textColor: '#BBE9DE',
@@ -90,6 +91,7 @@ export default function CalendarForm({ event, range, onCancel }) {
   const onSubmit = async (data) => {
     try {
       const newEvent = {
+        resourceId: data.resourceId,
         title: data.title,
         description: data.description,
         textColor: data.textColor,
@@ -103,7 +105,6 @@ export default function CalendarForm({ event, range, onCancel }) {
         enqueueSnackbar('Create success!');
         dispatch(createEvent(newEvent));
       }
-
 
       onCancel();
       reset();
@@ -132,11 +133,16 @@ export default function CalendarForm({ event, range, onCancel }) {
       <Stack spacing={3} sx={{ p: 3 }}>
         <RHFTextField name="title" label="Title" />
         {/* {Dropdown menu will fetch services} */}
-        <RHFSelect name="service" label="Service" control={SERVCE_OPTIONS} />
-
-        <RHFSelect name="customer" label="Customer" options={COLOR_OPTIONS} />
-
-        <RHFSelect name="employee" label="Employee" options={COLOR_OPTIONS} />
+        <RHFSelect name="resourceId" label="Employee">
+          <option value="">Select a service</option>
+          <option value="1">Sandra Jankins</option>
+          <option value="2">Kianna Franci</option>
+          <option value="3">Maiken Vaccaro</option>
+          <option value="4">Livia Rhiel Madsen</option>
+          <option value="5">Celina Philips</option>
+          <option value="6">Dulce Troff</option>
+          <option value="7">Renate Mango</option>
+        </RHFSelect>
 
         <RHFTextField name="description" label="Description" multiline rows={4} />
 
