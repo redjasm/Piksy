@@ -121,7 +121,8 @@ export default function AccountGeneral() {
               <RHFTextField name="email" label="Email Address" />
 
               <RHFTextField name="phoneNumber" label="Phone Number" />
-              <RHFTextField name="address" label="Address" />
+              <RHFTextField name="role" label="Role" />
+              {/* <RHFTextField name="address" label="Address" />
 
               <RHFSelect name="country" label="Country" placeholder="Country">
                 <option value="" />
@@ -135,11 +136,11 @@ export default function AccountGeneral() {
               <RHFTextField name="state" label="State/Region" />
 
               <RHFTextField name="city" label="City" />
-              <RHFTextField name="zipCode" label="Zip/Code" />
+              <RHFTextField name="zipCode" label="Zip/Code" /> */}
             </Box>
 
             <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
-              <RHFTextField name="about" multiline rows={4} label="About" />
+              {/* <RHFTextField name="about" multiline rows={4} label="About" /> */}
 
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 Save Changes

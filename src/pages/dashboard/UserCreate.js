@@ -28,14 +28,14 @@ export default function UserCreate() {
   const currentUser = _userList.find((user) => paramCase(user.name) === name);
 
   return (
-    <Page title="User: Create a new user">
+    <Page title="Employee: Create a new employee">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading={!isEdit ? 'Create a new user' : 'Edit user'}
+          heading={!isEdit ? 'Create a new employee' : 'Edit employee'}
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.list },
-            { name: !isEdit ? 'New user' : capitalCase(name) },
+            { name: 'Employee', href: PATH_DASHBOARD.user.list },
+            { name: !isEdit ? 'New Employee' : capitalCase(name) },
           ]}
         />
 

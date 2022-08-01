@@ -81,13 +81,13 @@ export default function UserProfile() {
   ];
 
   return (
-    <Page title="User: Profile">
+    <Page title="Employee: Profile">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
           heading="Profile"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
+            { name: 'Employee', href: PATH_DASHBOARD.user.root },
             { name: user?.displayName || '' },
           ]}
         />

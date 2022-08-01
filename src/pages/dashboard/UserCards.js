@@ -18,13 +18,13 @@ export default function UserCards() {
   const { themeStretch } = useSettings();
 
   return (
-    <Page title="User: Cards">
+    <Page title="Employee: Cards">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading="User Cards"
+          heading="Employee Cards"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
+            { name: 'Employee', href: PATH_DASHBOARD.user.root },
             { name: 'Cards' },
           ]}
         />
