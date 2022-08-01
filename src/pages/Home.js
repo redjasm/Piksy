@@ -27,7 +27,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function HomePage() {
   return (
-    <Page title="The starting point for your next project">
+    <Page title="Book Your Services Online">
       <HomeHero />
 
       <ContentStyle>

@@ -2,8 +2,8 @@ import { pxToRem, responsiveFontSizes } from '../utils/getFontValue';
 
 // ----------------------------------------------------------------------
 
-const FONT_PRIMARY = 'Public Sans, sans-serif'; // Google Font
-// const FONT_SECONDARY = 'CircularStd, sans-serif'; // Local Font
+const FONT_PRIMARY = 'Urbanist, sans-serif'; // Google Font
+const FONT_SECONDARY = 'Manrope, sans-serif'; // Local Font
 
 const typography = {
   fontFamily: FONT_PRIMARY,
@@ -48,28 +48,34 @@ const typography = {
     ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
   },
   subtitle1: {
+    fontFamily: FONT_SECONDARY,
     fontWeight: 600,
     lineHeight: 1.5,
     fontSize: pxToRem(16),
   },
   subtitle2: {
+    fontFamily: FONT_SECONDARY,
     fontWeight: 600,
     lineHeight: 22 / 14,
     fontSize: pxToRem(14),
   },
   body1: {
+    fontFamily: FONT_SECONDARY,
     lineHeight: 1.5,
     fontSize: pxToRem(16),
   },
   body2: {
+    fontFamily: FONT_SECONDARY,
     lineHeight: 22 / 14,
     fontSize: pxToRem(14),
   },
   caption: {
+    fontFamily: FONT_SECONDARY,
     lineHeight: 1.5,
     fontSize: pxToRem(12),
   },
   overline: {
+    fontFamily: FONT_SECONDARY,
     fontWeight: 700,
     lineHeight: 1.5,
     fontSize: pxToRem(12),

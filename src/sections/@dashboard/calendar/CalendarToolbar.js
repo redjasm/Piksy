@@ -15,7 +15,6 @@ const VIEW_OPTIONS = [
   { value: 'timeGridWeek', label: 'Week', icon: 'ic:round-view-week' },
   { value: 'timeGridDay', label: 'Day', icon: 'ic:round-view-day' },
   { value: 'resourceTimeline', label: 'Timeline', icon: 'ic:round-view-list' },
-  { value: 'resourceTimelineWeek', label: 'Timeline Week', icon: 'ic:round-view-list' },
   { value: 'customWeek', label: 'custom Week', icon: 'ic:round-view-list' },
   { value: 'listWeek', label: 'Agenda', icon: 'ic:round-view-agenda' },
 ];

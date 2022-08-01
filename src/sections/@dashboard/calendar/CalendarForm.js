@@ -29,12 +29,12 @@ const SERVCE_OPTIONS = [
   { value: 'service6', label: 'Service 6' },
 ];
 const COLOR_OPTIONS = [
-  '#BBE9DE', // #00AB55 theme.palette.primary.main,
-  '#D5EFC2', // #1890FF theme.palette.info.main,
-  '#FBC9D2', // #54D62C theme.palette.success.main,
-  '#FFC107', // theme.palette.warning.main,
-  '#FF4842', // theme.palette.error.main
-  '#04297A', // theme.palette.info.darker
+  '#BBE9DE', // consulation cyan
+  '#D5EFC2', // filler green
+  '#FBC9D2', // Thread lift red
+  '#BCE6F8', // Dermaplaning blue
+  '#D3CCFD', // Micro-needling purple
+  '#FFE399', // Spine Message yellow
   '#7A0C2E', // theme.palette.error.darker
 ];
 
