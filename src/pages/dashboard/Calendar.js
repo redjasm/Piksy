@@ -226,6 +226,15 @@ export default function Calendar() {
               ]}
               resources={resources}
               expandRows
+              resourceAreaHeaderContent={'Employee'}
+              slotDuration={'00:15:00'}
+              slotMinTime={'08:00:00'}
+              slotMaxTime={'18:00:00'}
+              views={{customWeek: {
+                type: 'resourceTimeline',
+                duration: { weeks: 1 },
+                slotDuration: {days: 1}
+            }}}
             />
           </CalendarStyle>
         </Card>
