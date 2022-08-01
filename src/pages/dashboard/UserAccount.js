@@ -30,22 +30,22 @@ export default function UserAccount() {
 
   const ACCOUNT_TABS = [
     {
-      value: 'general',
+      value: 'Employee Info',
       icon: <Iconify icon={'ic:round-account-box'} width={20} height={20} />,
       component: <AccountGeneral />,
     },
     {
-      value: 'billing',
+      value: 'Assigned Services',
       icon: <Iconify icon={'ic:round-receipt'} width={20} height={20} />,
       component: <AccountBilling cards={_userPayment} addressBook={_userAddressBook} invoices={_userInvoices} />,
     },
     {
-      value: 'notifications',
+      value: 'Working Hours',
       icon: <Iconify icon={'eva:bell-fill'} width={20} height={20} />,
       component: <AccountNotifications />,
     },
     {
-      value: 'social_links',
+      value: 'Days Off',
       icon: <Iconify icon={'eva:share-fill'} width={20} height={20} />,
       component: <AccountSocialLinks myProfile={_userAbout} />,
     },
@@ -57,13 +57,13 @@ export default function UserAccount() {
   ];
 
   return (
-    <Page title="User: Account Settings">
+    <Page title="Employee: Account Settings">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
           heading="Account"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
+            { name: 'Employee', href: PATH_DASHBOARD.user.root },
             { name: 'Account Settings' },
           ]}
         />
