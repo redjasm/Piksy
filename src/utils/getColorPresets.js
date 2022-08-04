@@ -22,12 +22,12 @@ export const colorPresets = [
   // CYAN
   {
     name: 'cyan',
-    lighter: '#b2dfdb',
-    light: '#4db6ac',
-    main: '#009688', 
-    dark: '#00796b', 
-    darker: '#004d40',
-    // contrastText: palette.light.grey[800],
+    lighter: '#b2ebf2',
+    light: '#4dd0e1',
+    main: '#00bcd4', 
+    dark: '#0097a7', 
+    darker: '#006064',
+    contrastText: palette.light.grey[800],
   },
   // BLUE
   {

@@ -1,7 +1,9 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled, useTheme } from '@mui/material/styles';
 import { Box, Button, AppBar, Toolbar, Container, Link } from '@mui/material';
+// routes
+import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';
@@ -76,9 +78,9 @@ export default function MainHeader() {
         >
           <Logo />
 
-          <Link href="https://docs-minimals.vercel.app/changelog" target="_blank" rel="noopener" underline="none">
+          <Link href="/#" target="_blank" rel="noopener" underline="none">
             <Label color="info" sx={{ ml: 1 }}>
-              v3.5.0
+              v1.0.0
             </Label>
           </Link>
 
@@ -86,13 +88,8 @@ export default function MainHeader() {
 
           {isDesktop && <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />}
 
-          <Button
-            variant="contained"
-            target="_blank"
-            rel="noopener"
-            href="https://material-ui.com/store/items/minimal-dashboard/"
-          >
-            Purchase Now
+          <Button size="large" variant="contained" component={RouterLink} to={PATH_DASHBOARD.root}>
+            Live Preview
           </Button>
 
           {!isDesktop && <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />}

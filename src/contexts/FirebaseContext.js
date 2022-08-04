@@ -14,7 +14,7 @@ import { FIREBASE_API } from '../config';
 
 // ----------------------------------------------------------------------
 
-const ADMIN_EMAILS = ['demo@minimals.cc'];
+const ADMIN_EMAILS = ['demo@piksy.no'];
 
 const firebaseApp = initializeApp(FIREBASE_API);
 

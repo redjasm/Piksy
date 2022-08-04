@@ -31,9 +31,9 @@ export default function HomePage() {
       <HomeHero />
 
       <ContentStyle>
-        <HomeMinimal />
+        {/* <HomeMinimal />
 
-        <HomeHugePackElements />
+        {/* <HomeHugePackElements />
 
         <HomeDarkMode />
 
@@ -45,7 +45,7 @@ export default function HomePage() {
 
         <HomeLookingFor />
 
-        <HomeAdvertisement />
+        <HomeAdvertisement /> */}
       </ContentStyle>
     </Page>
   );
