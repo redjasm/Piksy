@@ -46,7 +46,7 @@ export default function Calendar() {
 
   const [date, setDate] = useState(new Date());
 
-  const [view, setView] = useState(isDesktop ? 'timeGridWeek' : 'listWeek');
+  const [view, setView] = useState(isDesktop ? 'customWeek' : 'listWeek');
 
   const selectedEvent = useSelector(selectedEventSelector);
 
@@ -58,15 +58,15 @@ export default function Calendar() {
     endTime: '18:00',
   };
 
-  const resources=[ 
-    { id: 1, title: 'Sandra Jankins' },
-    { id: 2, title: 'Kianna Franci' },
-    { id: 3, title: 'Maiken Vaccaro' },
-    { id: 4, title: 'Livia Rhiel Madsen' },
-    { id: 5, title: 'Celina Philips' },
-    { id: 6, title: 'Dulce Troff' },
-    { id: 7, title: 'Renate Mango' }
-  ]
+  const resources = [
+    { id: 1, title: 'Sandra Jankins', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
+    { id: 2, title: 'Kianna Franci', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
+    { id: 3, title: 'Maiken Vaccaro', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
+    { id: 4, title: 'Livia Rhiel Madsen', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
+    { id: 5, title: 'Celina Philips', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
+    { id: 6, title: 'Dulce Troff', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
+    { id: 7, title: 'Renate Mango', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
+  ];
 
   useEffect(() => {
     dispatch(getEvents());
@@ -76,7 +76,7 @@ export default function Calendar() {
     const calendarEl = calendarRef.current;
     if (calendarEl) {
       const calendarApi = calendarEl.getApi();
-      const newView = isDesktop ? 'timeGridWeek' : 'listWeek';
+      const newView = isDesktop ? 'customWeek' : 'listWeek';
       calendarApi.changeView(newView);
       setView(newView);
     }
@@ -214,7 +214,8 @@ export default function Calendar() {
               eventDrop={handleDropEvent}
               eventClick={handleSelectEvent}
               eventResize={handleResizeEvent}
-              height={isDesktop ? 720 : 'auto'}
+              // eventRender={}
+              height={'auto'} // height={isDesktop ? 720 : 'auto'}
               businessHours={businessHours}
               plugins={[
                 listPlugin,
@@ -222,19 +223,24 @@ export default function Calendar() {
                 timelinePlugin,
                 timeGridPlugin,
                 interactionPlugin,
-                resourceTimelinePlugin
+                resourceTimelinePlugin,
               ]}
               resources={resources}
-              expandRows
+              resourceRender={<div>blue</div>}
+              resourceAreaWidth={'20%'} // width of resource column
+              expandRows // expands resource rows to fit the whole claendar height
               resourceAreaHeaderContent={'Employee'}
+              eventMinHeight={50}
               slotDuration={'00:15:00'}
-              slotMinTime={'08:00:00'}
-              slotMaxTime={'18:00:00'}
-              views={{customWeek: {
-                type: 'resourceTimeline',
-                duration: { weeks: 1 },
-                slotDuration: {days: 1}
-            }}}
+              slotMinTime={'07:00:00'}
+              slotMaxTime={'19:00:00'}
+              views={{
+                customWeek: {
+                  type: 'resourceTimeline',
+                  duration: { weeks: 1 },
+                  slotDuration: { days: 1 },
+                },
+              }}
             />
           </CalendarStyle>
         </Card>

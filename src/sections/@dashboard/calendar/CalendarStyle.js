@@ -35,6 +35,7 @@ const CalendarStyle = styled('div')(({ theme }) => ({
   '& .fc .fc-event': {
     borderColor: 'transparent',
     backgroundColor: 'transparent',
+    // height: '85px'
   },
   '& .fc .fc-event .fc-event-main': {
     padding: '2px 4px',
@@ -46,7 +47,7 @@ const CalendarStyle = styled('div')(({ theme }) => ({
       top: 0,
       left: 0,
       width: '100%',
-      height: '100%',
+      height: '100%', // '100%',
       content: "''",
       borderRadius: 4,
       position: 'absolute',
@@ -155,6 +156,7 @@ const CalendarStyle = styled('div')(({ theme }) => ({
       borderColor: 'transparent',
     },
   },
+
 }));
 
 export default CalendarStyle;

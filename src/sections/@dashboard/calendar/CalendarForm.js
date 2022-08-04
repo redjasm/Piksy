@@ -40,6 +40,7 @@ const COLOR_OPTIONS = [
 
 const getInitialValues = (event, range) => {
   const _event = {
+    userId: '',
     resourceId: 1,
     title: '',
     description: '',
@@ -91,6 +92,7 @@ export default function CalendarForm({ event, range, onCancel }) {
   const onSubmit = async (data) => {
     try {
       const newEvent = {
+        userId: '',
         resourceId: data.resourceId,
         title: data.title,
         description: data.description,

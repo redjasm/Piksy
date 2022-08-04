@@ -7,6 +7,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+// mixpanel
+import mixpanel from 'mixpanel-browser';
 // routes
 import { PATH_AUTH } from '../../../routes/paths';
 // hooks
@@ -15,9 +17,8 @@ import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // components
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
-
 // ----------------------------------------------------------------------
-
+mixpanel.init('320ce074e02ba94abeabe9ab8f65bb9d', {debug: true});
 export default function LoginForm() {
   const { login } = useAuth();
 
@@ -31,7 +32,7 @@ export default function LoginForm() {
   });
 
   const defaultValues = {
-    email: 'demo@minimals.cc',
+    email: 'demo@piksy.no',
     password: 'demo1234',
     remember: true,
   };
@@ -51,6 +52,7 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     try {
       await login(data.email, data.password);
+      mixpanel.track('Login');
     } catch (error) {
       console.error(error);
 
