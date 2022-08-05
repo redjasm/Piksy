@@ -9,16 +9,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
+// redux
+import { createEmployee } from '../../../redux/slices/employee';
 // utils
 import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
-import { countries } from '../../../_mock';
+// import { countries } from '../../../_mock';
 // components
 import Label from '../../../components/Label';
-import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
-
+import { FormProvider, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
+// import { RHFSelect, RHFSwitch } from '../../../components/hook-form';
 // ----------------------------------------------------------------------
 
 UserNewEditForm.propTypes = {
@@ -49,15 +51,15 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
       name: currentUser?.name || '',
       email: currentUser?.email || '',
       phoneNumber: currentUser?.phoneNumber || '',
-      /* address: currentUser?.address || '',
-      country: currentUser?.country || '',
-      state: currentUser?.state || '',
-      city: currentUser?.city || '',
-      zipCode: currentUser?.zipCode || '',
+      // address: currentUser?.address || '',
+      // country: currentUser?.country || '',
+      // state: currentUser?.state || '',
+      // city: currentUser?.city || '',
+      // zipCode: currentUser?.zipCode || '',
       avatarUrl: currentUser?.avatarUrl || '',
-      isVerified: currentUser?.isVerified || true,
-      status: currentUser?.status,
-      company: currentUser?.company || '', */
+      // isVerified: currentUser?.isVerified || true,
+      status: currentUser?.status || true,
+      // company: currentUser?.company || '',
       role: currentUser?.role || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -89,13 +91,21 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, currentUser]);
-
-  const onSubmit = async () => {
+  /*
+  const onSubmit = async (newEmployee) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
       navigate(PATH_DASHBOARD.user.list);
+    } catch (error) {
+      console.error(error);
+    }
+  }; */
+  const onSubmit = async (newEmployee) => {
+    try {
+      await createEmployee(newEmployee);
+      enqueueSnackbar('Create success!');
     } catch (error) {
       console.error(error);
     }
@@ -165,7 +175,7 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
                       <Switch
                         {...field}
                         checked={field.value !== 'active'}
-                        onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
+                        onChange={(event) => field.onChange(event.target.checked ? 'away' : 'active')}
                       />
                     )}
                   />
@@ -173,7 +183,7 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
                 label={
                   <>
                     <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Banned
+                      Away
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                       Apply disable account
@@ -184,7 +194,7 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
               />
             )}
 
-            <RHFSwitch
+            {/* <RHFSwitch
               name="isVerified"
               labelPlacement="start"
               label={
@@ -198,7 +208,7 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
                 </>
               }
               sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
-            />
+            /> */}
           </Card>
         </Grid>
 
@@ -216,8 +226,6 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
               <RHFTextField name="email" label="Email Address" />
               <RHFTextField name="phoneNumber" label="Phone Number" />
 
-
-              
               {/* <RHFSelect name="country" label="Country" placeholder="Country">
                 <option value="" />
                 {countries.map((option) => (
