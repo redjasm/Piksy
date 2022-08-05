@@ -25,7 +25,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 import useTabs from '../../hooks/useTabs';
 import useSettings from '../../hooks/useSettings';
 import useTable, { getComparator, emptyRows } from '../../hooks/useTable';
-// _mock_
+// _mock
 import { _userList } from '../../_mock';
 // components
 import Page from '../../components/Page';
@@ -38,7 +38,7 @@ import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/l
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = ['all', 'active', 'banned'];
+const STATUS_OPTIONS = ['all', 'active', 'away'];
 
 const ROLE_OPTIONS = [
   'all',
@@ -58,7 +58,7 @@ const TABLE_HEAD = [
   // { id: 'company', label: 'Company', align: 'left' },
   { id: 'email', label: 'Email', align: 'left' },
   { id: 'role', label: 'Role', align: 'left' },
-  { id: 'isVerified', label: 'Verified', align: 'center' },
+  // { id: 'isVerified', label: 'Verified', align: 'center' },
   { id: 'status', label: 'Status', align: 'left' },
   { id: '' },
 ];
