@@ -83,20 +83,15 @@ export const { selectEmployee } = slice.actions;
 
 // ----------------------------------------------------------------------
 
-export function getEmployees() {
-//  const employees = getDocs(query(collection(db, "employees")));
-// console.log(employees);
-  // return async () => {
-  //   dispatch(slice.actions.startLoading());
-  //   try {
-  //     const employees = [];
-  //     await getDocs(query(collection(db, "employees")));
-  //     dispatch(slice.actions.getEmployeesSuccess(employees));
-  //   } catch (error) {
-  //     dispatch(slice.actions.hasError(error));
-  //     console.log(error);
-  //   }
-  // }
+export async function getEmployees() {
+  const employees = [];
+  const querySnapshot = await getDocs(collection(db, 'employees'));
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data())
+    employees.push({ ...doc.data(), id: doc.id });
+  });
+  console.log(employees);
+  return employees;
 }
 
 // ----------------------------------------------------------------------
@@ -104,6 +99,7 @@ export function getEmployees() {
 export function createEmployee(newEmployee) {
   addDoc(collection(db, 'employees'), newEmployee);
 }
+
 // ----------------------------------------------------------------------
 export function updateEmployee(employeeId, updateEmployee) {
   return async () => {

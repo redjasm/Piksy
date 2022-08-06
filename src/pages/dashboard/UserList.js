@@ -1,5 +1,5 @@
 import { paramCase } from 'change-case';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import {
@@ -27,6 +27,9 @@ import useSettings from '../../hooks/useSettings';
 import useTable, { getComparator, emptyRows } from '../../hooks/useTable';
 // _mock
 import { _userList } from '../../_mock';
+// redux
+
+
 // components
 import Page from '../../components/Page';
 import Iconify from '../../components/Iconify';
@@ -89,7 +92,7 @@ export default function UserList() {
 
   const navigate = useNavigate();
 
-  const [tableData, setTableData] = useState(_userList);
+  const [tableData, setTableData] = useState([]);
 
   const [filterName, setFilterName] = useState('');
 
@@ -136,6 +139,14 @@ export default function UserList() {
     (!dataFiltered.length && !!filterName) ||
     (!dataFiltered.length && !!filterRole) ||
     (!dataFiltered.length && !!filterStatus);
+  
+    useEffect(() => {
+      dispatch(getEmployees());
+    }, [dispatch]);
+
+
+
+  
 
   return (
     <Page title="Employee: List">
@@ -269,7 +280,6 @@ export default function UserList() {
 
 function applySortFilter({ tableData, comparator, filterName, filterStatus, filterRole }) {
   const stabilizedThis = tableData.map((el, index) => [el, index]);
-
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;

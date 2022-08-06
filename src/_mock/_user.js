@@ -136,8 +136,14 @@ export const _userInvoices = [...Array(10)].map((_, index) => ({
 //   status: randomInArray(['active', 'away']),
 //   role: _mock.role(index),
 // }));
-// export const _userList = getEmployees();
-export const _userList = [
+
+
+const employeeList = getEmployees();
+export const _userList = employeeList;
+
+// export const _userList = [];
+
+/* export const _userList = [
   {
     id: 'RG21RxZdNcBfwi0NmiUk',
     name: 'Magnus Carlson',
@@ -155,4 +161,4 @@ export const _userList = [
     role: 'Admin',
     status: 'away',
   }
-];
+]; */
