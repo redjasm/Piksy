@@ -120,6 +120,7 @@ export const { openModal, closeModal, selectEvent } = slice.actions;
 // ----------------------------------------------------------------------
 
 export function getEvents() {
+  
   return async () => {
     dispatch(slice.actions.startLoading());
     try {

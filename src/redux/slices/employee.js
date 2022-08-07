@@ -103,6 +103,7 @@ export function getEmployees() {
 export function createEmployee(newEmployee) {
   addDoc(collection(db, 'employees'), newEmployee);
 }
+
 // ----------------------------------------------------------------------
 
 export function updateEmployee(employee) {

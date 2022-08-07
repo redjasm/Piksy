@@ -51,6 +51,11 @@ const navConfig = [
         icon: ICONS.user,
       },
       {
+        title: 'Customers', // Customers
+        path: PATH_DASHBOARD.customer.list,
+        icon: ICONS.user,
+      },
+      {
         title: 'Services',
          path: PATH_DASHBOARD.service.list,
         icon: ICONS.user,

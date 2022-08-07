@@ -100,7 +100,14 @@ export default function Router() {
             { element: <Navigate to="/dashboard/service/list" replace />, index: true },
             { path: 'list', element: <ServiceList /> },
             { path: 'new', element: <ServiceCreate /> },
-            { path: ':name/edit', element: <ServiceCreate /> },
+            { path: ':name/edit', element: <ServiceCreate /> }
+            ],
+          path: 'customer',
+          children: [
+            { element: <Navigate to="/dashboard/customer/list" replace />, index: true },
+            { path: 'list', element: <CustomerList /> },
+            { path: 'new', element: <CustomerCreate /> },
+            { path: ':name/edit', element: <CustomerCreate /> },
           ],
         },
         /* {
@@ -220,6 +227,12 @@ const ServiceList = Loadable(lazy(() => import('../pages/dashboard/ServiceList')
 const ServiceCreate = Loadable(lazy(() => import('../pages/dashboard/ServiceCreate')));
 const ServiceEdit = Loadable(lazy(() => import('../pages/dashboard/ServiceEdit')));
 // const ServiceDetails = Loadable(lazy(() => import('../pages/dashboard/ServiceDetails')));
+
+// CUSTOMERS
+const CustomerList = Loadable(lazy(() => import('../pages/dashboard/CustomerList')));
+// const CustomerDetails = Loadable(lazy(() => import('../pages/dashboard/CustomerDetails')));
+const CustomerCreate = Loadable(lazy(() => import('../pages/dashboard/CustomerCreate')));
+const CustomerEdit = Loadable(lazy(() => import('../pages/dashboard/CustomerEdit')));
 
 // APP
 // const Chat = Loadable(lazy(() => import('../pages/dashboard/Chat')));
