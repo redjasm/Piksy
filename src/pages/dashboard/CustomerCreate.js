@@ -5,7 +5,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { Container } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getEmployees } from '../../redux/slices/employee';
+import { getCustomers } from '../../redux/slices/customer';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -14,13 +14,13 @@ import useSettings from '../../hooks/useSettings';
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 // sections
-import UserNewEditForm from '../../sections/@dashboard/user/UserNewEditForm';
+import CustomerNewEditForm from '../../sections/@dashboard/customer/CustomerNewEditForm';
 // firebase
 
 
 // ----------------------------------------------------------------------
 
-export default function UserCreate() {
+export default function CustomerCreate() {
   const { themeStretch } = useSettings();
 
   const dispatch = useDispatch();
@@ -29,29 +29,29 @@ export default function UserCreate() {
 
   const { name = '' } = useParams();
 
-  const { employees } = useSelector((state) => state.employee);
+  const { customers } = useSelector((state) => state.customers);
 
   const isEdit = pathname.includes('edit');
 
-  const currentUser = employees.find((user) => paramCase(user.name) === name);
+  const currentCustomer = customers.find((customer) => paramCase(customer.name) === name);
 
   useEffect(() => {
-    dispatch(getEmployees());
+    dispatch(getCustomers());
   }, [dispatch]);
 
   return (
-    <Page title="Employee: Create a new employee">
+    <Page title="Customer: Create a new customer">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading={!isEdit ? 'Create a new employee' : 'Edit employee'}
+          heading={!isEdit ? 'Create a new customer' : 'Edit customer'}
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Employee', href: PATH_DASHBOARD.user.list },
-            { name: !isEdit ? 'New Employee' : capitalCase(name) },
+            { name: 'Customer', href: PATH_DASHBOARD.customer.list }, 
+            { name: !isEdit ? 'New Customer' : capitalCase(name) },
           ]}
         />
 
-        <UserNewEditForm isEdit={isEdit} currentUser={currentUser} />
+        <CustomerNewEditForm isEdit={isEdit} currentCustomer={currentCustomer} />
       </Container>
     </Page>
   );

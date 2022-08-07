@@ -21,7 +21,7 @@ import {
 } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getEmployees, deleteEmployee } from '../../redux/slices/employee';
+import { getCustomers, deleteCustomer } from '../../redux/slices/customer';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -41,13 +41,16 @@ import {
   TableSkeleton,
 } from '../../components/table';
 // sections
-import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/list';
+import { CustomerTableToolbar, CustomerTableRow } from '../../sections/@dashboard/customer/list';
 
 // ----------------------------------------------------------------------
 
 const STATUS_OPTIONS = ['all', 'active', 'away'];
 
-const ROLE_OPTIONS = ['all', 'Admin', 'Employee', 'Creator'];
+
+const ROLE_OPTIONS = ['all', 'Admin', 'Customer', 'Creator'];
+// const ROLE_OPTIONS = ['Customer'];
+
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
@@ -60,7 +63,7 @@ const TABLE_HEAD = [
 
 // ----------------------------------------------------------------------
 
-export default function UserList() {
+export default function CustomerList() {
   const {
     dense,
     page,
@@ -87,7 +90,7 @@ export default function UserList() {
 
   const dispatch = useDispatch();
 
-  const { employees, isLoading } = useSelector((state) => state.employee);
+  const { customers, isLoading } = useSelector((state) => state.customer);
 
   const [tableData, setTableData] = useState([]);
 
@@ -108,7 +111,7 @@ export default function UserList() {
 
   const handleDeleteRow = (id) => {
     const deleteRow = tableData.filter((row) => row.id !== id);
-    deleteEmployee(id);
+    deleteCustomer(id);
     setSelected([]);
     setTableData(deleteRow);
   };
@@ -120,7 +123,7 @@ export default function UserList() {
   };
 
   const handleEditRow = (id) => {
-    navigate(PATH_DASHBOARD.user.edit(paramCase(id)));
+    navigate(PATH_DASHBOARD.customer.edit(paramCase(id))); 
   };
 
   const dataFiltered = applySortFilter({
@@ -140,33 +143,33 @@ export default function UserList() {
     (!isLoading && !dataFiltered.length);
 
   useEffect(() => {
-    dispatch(getEmployees());
+    dispatch(getCustomers());
   }, [dispatch]);
 
   useEffect(() => {
-    if (employees.length) {
-      setTableData(employees);
+    if (customers.length) {
+      setTableData(customers);
     }
-  }, [employees]);
+  }, [customers]);
 
   return (
-    <Page title="Employee: List">
+    <Page title="Customer: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading="Employee List"
+          heading="Customer List"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'Employee', href: PATH_DASHBOARD.user.root },
+            { name: 'Customer', href: PATH_DASHBOARD.customer.root },
             { name: 'List' },
           ]}
           action={
             <Button
               variant="contained"
               component={RouterLink}
-              to={PATH_DASHBOARD.user.new}
+              to={PATH_DASHBOARD.customer.new}
               startIcon={<Iconify icon={'eva:plus-fill'} />}
             >
-              New Employee
+              New Customer
             </Button>
           }
         />
@@ -187,7 +190,7 @@ export default function UserList() {
 
           <Divider />
 
-          <UserTableToolbar
+          <CustomerTableToolbar
             filterName={filterName}
             filterRole={filterRole}
             onFilterName={handleFilterName}
@@ -239,7 +242,7 @@ export default function UserList() {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) =>
                       row ? (
-                      <UserTableRow
+                      <CustomerTableRow
                         key={row.id}
                         row={row}
                         selected={selected.includes(row.id)}

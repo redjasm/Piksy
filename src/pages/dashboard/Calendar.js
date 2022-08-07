@@ -12,6 +12,7 @@ import { Card, Button, Container, DialogTitle } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getEvents, openModal, closeModal, updateEvent, selectEvent, selectRange } from '../../redux/slices/calendar';
+import { getEmployees } from '../../redux/slices/employee';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -58,18 +59,18 @@ export default function Calendar() {
     endTime: '18:00',
   };
 
-  const resources = [
-    { id: 1, title: 'Sandra Jankins', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
-    { id: 2, title: 'Kianna Franci', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
-    { id: 3, title: 'Maiken Vaccaro', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
-    { id: 4, title: 'Livia Rhiel Madsen', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
-    { id: 5, title: 'Celina Philips', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
-    { id: 6, title: 'Dulce Troff', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
-    { id: 7, title: 'Renate Mango', imageUrl: 'https://ui-avatars.com/api/?name=John+Doe' },
-  ];
+  const resources = useSelector((state) => state.employee.employees).map((employee) => ({
+    id: employee.id,
+    title: employee.name,
+    imageUrl: employee.avatar,
+  }));
 
   useEffect(() => {
     dispatch(getEvents());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getEmployees());
   }, [dispatch]);
 
   useEffect(() => {

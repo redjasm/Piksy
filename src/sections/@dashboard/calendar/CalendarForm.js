@@ -11,7 +11,7 @@ import { Box, Stack, Button, Tooltip, TextField, IconButton, DialogActions } fro
 import { LoadingButton } from '@mui/lab';
 import { MobileDateTimePicker } from '@mui/x-date-pickers';
 // redux
-import { useDispatch } from '../../../redux/store';
+import { useDispatch, useSelector } from '../../../redux/store';
 import { createEvent, updateEvent, deleteEvent } from '../../../redux/slices/calendar';
 // components
 import Iconify from '../../../components/Iconify';
@@ -19,15 +19,6 @@ import { ColorSinglePicker } from '../../../components/color-utils';
 import { FormProvider, RHFTextField, RHFSelect } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
-const SERVCE_OPTIONS = [
-  { value: '', label: 'Select a service' },
-  { value: 'service1', label: 'Service 1' },
-  { value: 'service2', label: 'Service 2' },
-  { value: 'service3', label: 'Service 3' },
-  { value: 'service4', label: 'Service 4' },
-  { value: 'service5', label: 'Service 5' },
-  { value: 'service6', label: 'Service 6' },
-];
 const COLOR_OPTIONS = [
   '#BBE9DE', // consulation cyan
   '#D5EFC2', // filler green
@@ -41,7 +32,7 @@ const COLOR_OPTIONS = [
 const getInitialValues = (event, range) => {
   const _event = {
     userId: '',
-    resourceId: 1,
+    resourceId: '',
     title: '',
     description: '',
     textColor: '#BBE9DE',
@@ -80,6 +71,9 @@ export default function CalendarForm({ event, range, onCancel }) {
     resolver: yupResolver(EventSchema),
     defaultValues: getInitialValues(event, range),
   });
+
+  // get employee options
+  const employees = useSelector((state) => state.employee.employees);
 
   const {
     reset,
@@ -135,15 +129,13 @@ export default function CalendarForm({ event, range, onCancel }) {
       <Stack spacing={3} sx={{ p: 3 }}>
         <RHFTextField name="title" label="Title" />
         {/* {Dropdown menu will fetch services} */}
-        <RHFSelect name="resourceId" label="Employee">
-          <option value="">Select a service</option>
-          <option value="1">Sandra Jankins</option>
-          <option value="2">Kianna Franci</option>
-          <option value="3">Maiken Vaccaro</option>
-          <option value="4">Livia Rhiel Madsen</option>
-          <option value="5">Celina Philips</option>
-          <option value="6">Dulce Troff</option>
-          <option value="7">Renate Mango</option>
+        <RHFSelect name="resourceId" label="Employee" placeholder="Employee">
+          <option value="" />
+          {employees.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.name}
+            </option>
+          ))}
         </RHFSelect>
 
         <RHFTextField name="description" label="Description" multiline rows={4} />

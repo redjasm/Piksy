@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
 // redux
-import { createEmployee, updateEmployee } from '../../../redux/slices/employee';
+import { createCustomer, updateCustomer } from '../../../redux/slices/customer';
 // utils
 import { fData } from '../../../utils/formatNumber';
 // routes
@@ -23,17 +23,17 @@ import { FormProvider, RHFSelect, RHFTextField, RHFUploadAvatar } from '../../..
 // import { RHFSelect, RHFSwitch } from '../../../components/hook-form';
 // ----------------------------------------------------------------------
 
-UserNewEditForm.propTypes = {
+CustomerNewEditForm.propTypes = {
   isEdit: PropTypes.bool,
-  currentUser: PropTypes.object,
+  currentCustomer: PropTypes.object,
 };
 
-export default function UserNewEditForm({ isEdit, currentUser }) {
+export default function CustomerNewEditForm({ isEdit, currentCustomer }) {
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const NewUserSchema = Yup.object().shape({
+  const NewCustomerSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     email: Yup.string().required('Email is required').email(),
     phoneNumber: Yup.string().required('Phone number is required'),
@@ -48,27 +48,27 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
 
   const defaultValues = useMemo(
     () => ({
-      id: currentUser?.id || '',
-      name: currentUser?.name || '',
-      email: currentUser?.email || '',
-      phoneNumber: currentUser?.phoneNumber || '',
-      // address: currentUser?.address || '',
-      // country: currentUser?.country || '',
-      // state: currentUser?.state || '',
-      // city: currentUser?.city || '',
-      // zipCode: currentUser?.zipCode || '',
-      avatarUrl: currentUser?.avatarUrl || 'https://randomuser.me/api/portraits/',
-      // isVerified: currentUser?.isVerified || true,
-      status: currentUser?.status || 'active',
-      // company: currentUser?.company || '',
-      role: currentUser?.role || '',
+      id: currentCustomer?.id || '',
+      name: currentCustomer?.name || '',
+      email: currentCustomer?.email || '',
+      phoneNumber: currentCustomer?.phoneNumber || '',
+      // address: currentCustomer?.address || '',
+      // country: currentCustomer?.country || '',
+      // state: currentCustomer?.state || '',
+      // city: currentCustomer?.city || '',
+      // zipCode: currentCustomer?.zipCode || '',
+      avatarUrl: currentCustomer?.avatarUrl || 'https://randomuser.me/api/portraits/',
+      // isVerified: currentCustomer?.isVerified || true,
+      status: currentCustomer?.status || 'active',
+      // company: currentCustomer?.company || '',
+      role: currentCustomer?.role || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentUser]
+    [currentCustomer]
   );
 
   const methods = useForm({
-    resolver: yupResolver(NewUserSchema),
+    resolver: yupResolver(NewCustomerSchema),
     defaultValues,
   });
 
@@ -84,26 +84,26 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
   const values = watch();
 
   useEffect(() => {
-    if (isEdit && currentUser) {
+    if (isEdit && currentCustomer) {
       reset(defaultValues);
     }
     if (!isEdit) {
       reset(defaultValues);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit, currentUser]);
+  }, [isEdit, currentCustomer]);
 
-  const onSubmit = async (newEmployee) => {
+  const onSubmit = async (newCustomer) => {
     try {
       if (!isEdit) {
-        await createEmployee(newEmployee);
+        await createCustomer(newCustomer);
         enqueueSnackbar('Create success!');
-        navigate(PATH_DASHBOARD.user.list);
+        navigate(PATH_DASHBOARD.customer.list); 
       } else {
-        console.log(newEmployee);
-        await updateEmployee(newEmployee);
+        console.log(newCustomer);
+        await updateCustomer(newCustomer);
         enqueueSnackbar('Update success!');
-        navigate(PATH_DASHBOARD.user.list);
+        navigate(PATH_DASHBOARD.customer.list);
       }
     } catch (error) {
       console.error(error);
@@ -240,8 +240,8 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
               <RHFTextField name="zipCode" label="Zip/Code" />
               <RHFTextField name="company" label="Company" /> */}
               {/* <RHFTextField name="role" label="Role" /> */}
-              <RHFSelect name="role" label="Role" placeholder="Employee">
-                <option value="employee">Employee</option>
+              <RHFSelect name="role" label="Role" placeholder="Customer">
+                <option value="customer">Customer</option>
                 <option value="admin">Admin</option>
                 <option value="creator">Creator</option>
               </RHFSelect>
@@ -249,7 +249,7 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'Create Employee' : 'Save Changes'}
+                {!isEdit ? 'Create Customer' : 'Save Changes'}
               </LoadingButton>
             </Stack>
           </Card>
