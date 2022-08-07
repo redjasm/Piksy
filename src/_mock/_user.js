@@ -1,5 +1,3 @@
-// redux
-import { getEmployees } from '../redux/slices/employee';
 // utils
 import _mock from './_mock';
 import { randomNumberRange, randomInArray } from './funcs';
@@ -120,45 +118,19 @@ export const _userInvoices = [...Array(10)].map((_, index) => ({
   price: _mock.number.price(index),
 }));
 
-// export const _userList = [...Array(24)].map((_, index) => ({
-//   id: _mock.id(index),
-//   avatarUrl: _mock.image.avatar(index),
-//   name: _mock.name.fullName(index),
-//   email: _mock.email(index),
-//   phoneNumber: _mock.phoneNumber(index),
-//   address: '908 Jack Locks',
-//   country: _mock.address.country(index),
-//   state: 'Virginia',
-//   city: 'Rancho Cordova',
-//   zipCode: '85807',
-//   company: _mock.company(index),
-//   isVerified: _mock.boolean(index),
-//   status: randomInArray(['active', 'away']),
-//   role: _mock.role(index),
-// }));
-
-
-const employeeList = getEmployees();
-export const _userList = employeeList;
-
-// export const _userList = [];
-
-/* export const _userList = [
-  {
-    id: 'RG21RxZdNcBfwi0NmiUk',
-    name: 'Magnus Carlson',
-    email: 'magimag@gmail.com',
-    phoneNumber: '+1 (865) 582-3258',
-    avatarUrl: 'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg',
-    role: 'Admin',
-    status: 'active',
-  }, {
-    id: 'nmiDlzlzgEwKR7M7j6iW',
-    name: 'Lil Wayne',
-    email: 'pain@gmail.com',
-    phoneNumber: '+1 (865) 582-3258',
-    avatarUrl: 'https://randomuser.me/api/portraits/',
-    role: 'Admin',
-    status: 'away',
-  }
-]; */
+export const _userList = [...Array(24)].map((_, index) => ({
+  id: _mock.id(index),
+  avatarUrl: _mock.image.avatar(index),
+  name: _mock.name.fullName(index),
+  email: _mock.email(index),
+  phoneNumber: _mock.phoneNumber(index),
+  address: '908 Jack Locks',
+  country: _mock.address.country(index),
+  state: 'Virginia',
+  city: 'Rancho Cordova',
+  zipCode: '85807',
+  company: _mock.company(index),
+  isVerified: _mock.boolean(index),
+  status: randomInArray(['active', 'away']),
+  role: _mock.role(index),
+}));

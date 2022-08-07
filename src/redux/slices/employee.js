@@ -1,7 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 // firebase
 import { initializeApp } from 'firebase/app';
-import { query, getFirestore, addDoc, getDocs, collection, deleteDoc, updateDoc, doc } from 'firebase/firestore';
+import {
+  query,
+  getFirestore,
+  addDoc,
+  getDocs,
+  collection,
+  deleteDoc,
+  updateDoc,
+  doc,
+} from 'firebase/firestore';
 import { FIREBASE_API } from '../../config';
 //
 import { dispatch } from '../store';
@@ -82,17 +91,21 @@ export default slice.reducer;
 export const { selectEmployee } = slice.actions;
 
 // ----------------------------------------------------------------------
-
-export async function getEmployees() {
-  const employees = [];
-  const querySnapshot = await getDocs(collection(db, 'employees'));
-  querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data())
-    employees.push({ ...doc.data(), id: doc.id });
-  });
-  console.log(employees);
-  return employees;
+export function getEmployees() {
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const employees = [];
+      (await getDocs(query(collection(db, "employees")))).forEach((doc) => {
+        employees.push({ ...doc.data(), id: doc.id });
+      });
+      dispatch(slice.actions.getEmployeesSuccess(employees));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
 }
+
 
 // ----------------------------------------------------------------------
 
@@ -103,8 +116,10 @@ export function createEmployee(newEmployee) {
 // ----------------------------------------------------------------------
 export function updateEmployee(employeeId, updateEmployee) {
   return async () => {
+    dispatch(slice.actions.startLoading());
     try {
       await updateDoc(doc(db, 'employees', `${employeeId}`), updateEmployee);
+      dispatch(slice.actions.updateEventSuccess( updateEmployee ));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -112,6 +127,19 @@ export function updateEmployee(employeeId, updateEmployee) {
 }
 
 // ----------------------------------------------------------------------
+
+/* export function deleteEmployee(employeeId) {
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    console.log(employeeId);
+    try {
+      await deleteDoc(collection(db, 'employees', `${employeeId}`));
+      dispatch(slice.actions.deleteEmployeeSuccess({ employeeId }));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+} */
 
 export function deleteEmployee(employeeId) {
   return async () => {

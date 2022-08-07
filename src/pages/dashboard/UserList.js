@@ -19,23 +19,27 @@ import {
   TablePagination,
   FormControlLabel,
 } from '@mui/material';
+// redux
+import { useDispatch, useSelector } from '../../redux/store';
+import { getEmployees } from '../../redux/slices/employee';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
 import useTabs from '../../hooks/useTabs';
 import useSettings from '../../hooks/useSettings';
 import useTable, { getComparator, emptyRows } from '../../hooks/useTable';
-// _mock
-import { _userList } from '../../_mock';
-// redux
-
-
 // components
 import Page from '../../components/Page';
 import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { TableEmptyRows, TableHeadCustom, TableNoData, TableSelectedActions } from '../../components/table';
+import {
+  TableEmptyRows,
+  TableHeadCustom,
+  TableNoData,
+  TableSelectedActions,
+  TableSkeleton,
+} from '../../components/table';
 // sections
 import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/list';
 
@@ -43,22 +47,10 @@ import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/l
 
 const STATUS_OPTIONS = ['all', 'active', 'away'];
 
-const ROLE_OPTIONS = [
-  'all',
-  'ux designer',
-  'full stack designer',
-  'backend developer',
-  'project manager',
-  'leader',
-  'ui designer',
-  'ui/ux designer',
-  'front end developer',
-  'full stack developer',
-];
+const ROLE_OPTIONS = ['all', 'Admin', 'Employee', 'Creator'];
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
-  // { id: 'company', label: 'Company', align: 'left' },
   { id: 'email', label: 'Email', align: 'left' },
   { id: 'role', label: 'Role', align: 'left' },
   // { id: 'isVerified', label: 'Verified', align: 'center' },
@@ -91,6 +83,11 @@ export default function UserList() {
   const { themeStretch } = useSettings();
 
   const navigate = useNavigate();
+
+
+  const dispatch = useDispatch();
+
+  const { employees, isLoading } = useSelector((state) => state.employee);
 
   const [tableData, setTableData] = useState([]);
 
@@ -138,15 +135,18 @@ export default function UserList() {
   const isNotFound =
     (!dataFiltered.length && !!filterName) ||
     (!dataFiltered.length && !!filterRole) ||
-    (!dataFiltered.length && !!filterStatus);
-  
-    useEffect(() => {
-      dispatch(getEmployees());
-    }, [dispatch]);
+    (!dataFiltered.length && !!filterStatus) ||
+    (!isLoading && !dataFiltered.length);
 
+  useEffect(() => {
+    dispatch(getEmployees());
+  }, [dispatch]);
 
-
-  
+  useEffect(() => {
+    if (employees.length) {
+      setTableData(employees);
+    }
+  }, [employees]);
 
   return (
     <Page title="Employee: List">
@@ -234,16 +234,22 @@ export default function UserList() {
                 />
 
                 <TableBody>
-                  {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                    <UserTableRow
-                      key={row.id}
-                      row={row}
-                      selected={selected.includes(row.id)}
-                      onSelectRow={() => onSelectRow(row.id)}
-                      onDeleteRow={() => handleDeleteRow(row.id)}
-                      onEditRow={() => handleEditRow(row.name)}
-                    />
-                  ))}
+                  {(isLoading ? [...Array(rowsPerPage)] : dataFiltered)
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) =>
+                      row ? (
+                      <UserTableRow
+                        key={row.id}
+                        row={row}
+                        selected={selected.includes(row.id)}
+                        onSelectRow={() => onSelectRow(row.id)}
+                        onDeleteRow={() => handleDeleteRow(row.id)}
+                        onEditRow={() => handleEditRow(row.name)}
+                      />
+                    ) : (
+                      !isNotFound && <TableSkeleton key={index} sx={{ height: denseHeight }} />
+                    )
+                    )}
 
                   <TableEmptyRows height={denseHeight} emptyRows={emptyRows(page, rowsPerPage, tableData.length)} />
 
