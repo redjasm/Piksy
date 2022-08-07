@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
 // redux
-import { createEmployee } from '../../../redux/slices/employee';
+import { createEmployee, updateEmployee } from '../../../redux/slices/employee';
 // utils
 import { fData } from '../../../utils/formatNumber';
 // routes
@@ -19,7 +19,7 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 // import { countries } from '../../../_mock';
 // components
 import Label from '../../../components/Label';
-import { FormProvider, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
+import { FormProvider, RHFSelect, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
 // import { RHFSelect, RHFSwitch } from '../../../components/hook-form';
 // ----------------------------------------------------------------------
 
@@ -48,6 +48,7 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
 
   const defaultValues = useMemo(
     () => ({
+      id: currentUser?.id || '',
       name: currentUser?.name || '',
       email: currentUser?.email || '',
       phoneNumber: currentUser?.phoneNumber || '',
@@ -91,21 +92,19 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, currentUser]);
-  /*
+
   const onSubmit = async (newEmployee) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.user.list);
-    } catch (error) {
-      console.error(error);
-    }
-  }; */
-  const onSubmit = async (newEmployee) => {
-    try {
-      await createEmployee(newEmployee);
-      enqueueSnackbar('Create success!');
+      if (!isEdit) {
+        await createEmployee(newEmployee);
+        enqueueSnackbar('Create success!');
+        navigate(PATH_DASHBOARD.user.list);
+      } else {
+        console.log(newEmployee);
+        await updateEmployee(newEmployee);
+        enqueueSnackbar('Update success!');
+        navigate(PATH_DASHBOARD.user.list);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -240,7 +239,12 @@ export default function UserNewEditForm({ isEdit, currentUser }) {
               <RHFTextField name="address" label="Address" />
               <RHFTextField name="zipCode" label="Zip/Code" />
               <RHFTextField name="company" label="Company" /> */}
-              <RHFTextField name="role" label="Role" />
+              {/* <RHFTextField name="role" label="Role" /> */}
+              <RHFSelect name="role" label="Role" placeholder="Employee">
+                <option value="employee">Employee</option>
+                <option value="admin">Admin</option>
+                <option value="creator">Creator</option>
+              </RHFSelect>
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
