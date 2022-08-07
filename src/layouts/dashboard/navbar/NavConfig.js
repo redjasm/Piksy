@@ -54,47 +54,13 @@ const navConfig = [
         title: 'Customers', // Customers
         path: PATH_DASHBOARD.customer.list,
         icon: ICONS.user,
-      }
-
-      /* // E-COMMERCE
+      },
       {
-        title: 'ecommerce',
-        path: PATH_DASHBOARD.eCommerce.root,
-        icon: ICONS.cart,
-        children: [
-          { title: 'shop', path: PATH_DASHBOARD.eCommerce.shop },
-          { title: 'product', path: PATH_DASHBOARD.eCommerce.demoView },
-          { title: 'list', path: PATH_DASHBOARD.eCommerce.list },
-          { title: 'create', path: PATH_DASHBOARD.eCommerce.new },
-          { title: 'edit', path: PATH_DASHBOARD.eCommerce.demoEdit },
-          { title: 'checkout', path: PATH_DASHBOARD.eCommerce.checkout },
-        ],
+        title: 'Services',
+         path: PATH_DASHBOARD.service.list,
+        icon: ICONS.user,
       },
 
-      // INVOICE
-      {
-        title: 'invoice',
-        path: PATH_DASHBOARD.invoice.root,
-        icon: ICONS.invoice,
-        children: [
-          { title: 'list', path: PATH_DASHBOARD.invoice.list },
-          { title: 'details', path: PATH_DASHBOARD.invoice.demoView },
-          { title: 'create', path: PATH_DASHBOARD.invoice.new },
-          { title: 'edit', path: PATH_DASHBOARD.invoice.demoEdit },
-        ],
-      },
-
-      // BLOG
-      {
-        title: 'blog',
-        path: PATH_DASHBOARD.blog.root,
-        icon: ICONS.blog,
-        children: [
-          { title: 'posts', path: PATH_DASHBOARD.blog.posts },
-          { title: 'post', path: PATH_DASHBOARD.blog.demoView },
-          { title: 'create', path: PATH_DASHBOARD.blog.new },
-        ],
-      }, */
     ],
   },
   

@@ -65,13 +65,19 @@ export const PATH_DASHBOARD = {
     edit: (name) => path(ROOTS_DASHBOARD, `/user/${name}/edit`),
     demoEdit: path(ROOTS_DASHBOARD, `/user/reece-chung/edit`),
   },
+  service: {
+    root: path(ROOTS_DASHBOARD, '/service'),
+    new: path(ROOTS_DASHBOARD, '/service/new'),
+    list: path(ROOTS_DASHBOARD, '/service/list'),
+    edit: (name) => path(ROOTS_DASHBOARD, `/service/${name}/edit`),
+  },
   
   customer: {
     root: path(ROOTS_DASHBOARD, '/customer'),
     new: path(ROOTS_DASHBOARD, '/customer/new'),
     list: path(ROOTS_DASHBOARD, '/customer/list'),
     edit: (name) => path(ROOTS_DASHBOARD, `/customer/${name}/edit`),
-  }
+  },
   /* eCommerce: {
     root: path(ROOTS_DASHBOARD, '/e-commerce'),
     shop: path(ROOTS_DASHBOARD, '/e-commerce/shop'),
