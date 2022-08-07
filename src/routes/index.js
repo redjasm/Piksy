@@ -94,6 +94,15 @@ export default function Router() {
             { path: 'account', element: <UserAccount /> },
           ],
         },
+        {
+          path: 'customer',
+          children: [
+            { element: <Navigate to="/dashboard/customer/list" replace />, index: true },
+            { path: 'list', element: <CustomerList /> },
+            { path: 'new', element: <CustomerCreate /> },
+            { path: ':name/edit', element: <CustomerCreate /> },
+          ],
+        },
         /* {
           path: 'invoice',
           children: [
@@ -205,6 +214,12 @@ const UserCards = Loadable(lazy(() => import('../pages/dashboard/UserCards')));
 const UserList = Loadable(lazy(() => import('../pages/dashboard/UserList')));
 const UserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
 const UserCreate = Loadable(lazy(() => import('../pages/dashboard/UserCreate')));
+
+// CUSTOMERS
+const CustomerList = Loadable(lazy(() => import('../pages/dashboard/CustomerList')));
+// const CustomerDetails = Loadable(lazy(() => import('../pages/dashboard/CustomerDetails')));
+const CustomerCreate = Loadable(lazy(() => import('../pages/dashboard/CustomerCreate')));
+const CustomerEdit = Loadable(lazy(() => import('../pages/dashboard/CustomerEdit')));
 
 // APP
 // const Chat = Loadable(lazy(() => import('../pages/dashboard/Chat')));
