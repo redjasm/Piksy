@@ -1,13 +1,15 @@
+import { useEffect } from 'react';
 import { paramCase, capitalCase } from 'change-case';
 import { useParams, useLocation } from 'react-router-dom';
 // @mui
 import { Container } from '@mui/material';
+// redux
+import { useDispatch, useSelector } from '../../redux/store';
+import { getEmployees } from '../../redux/slices/employee';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
 import useSettings from '../../hooks/useSettings';
-// _mock_
-import { _userList } from '../../_mock';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
@@ -21,13 +23,21 @@ import UserNewEditForm from '../../sections/@dashboard/user/UserNewEditForm';
 export default function UserCreate() {
   const { themeStretch } = useSettings();
 
+  const dispatch = useDispatch();
+
   const { pathname } = useLocation();
 
   const { name = '' } = useParams();
 
+  const { employees } = useSelector((state) => state.employee);
+
   const isEdit = pathname.includes('edit');
 
-  const currentUser = _userList.find((user) => paramCase(user.name) === name);
+  const currentUser = employees.find((user) => paramCase(user.name) === name);
+
+  useEffect(() => {
+    dispatch(getEmployees());
+  }, [dispatch]);
 
   return (
     <Page title="Employee: Create a new employee">

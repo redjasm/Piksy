@@ -21,7 +21,7 @@ import {
 } from '@mui/material';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
-import { getEmployees } from '../../redux/slices/employee';
+import { getEmployees, deleteEmployee } from '../../redux/slices/employee';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -107,6 +107,7 @@ export default function UserList() {
 
   const handleDeleteRow = (id) => {
     const deleteRow = tableData.filter((row) => row.id !== id);
+    deleteEmployee(id);
     setSelected([]);
     setTableData(deleteRow);
   };
