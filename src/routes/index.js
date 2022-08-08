@@ -102,6 +102,8 @@ export default function Router() {
             { path: 'new', element: <ServiceCreate /> },
             { path: ':name/edit', element: <ServiceCreate /> }
             ],
+        },
+        {
           path: 'customer',
           children: [
             { element: <Navigate to="/dashboard/customer/list" replace />, index: true },

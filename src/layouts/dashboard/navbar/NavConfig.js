@@ -58,7 +58,7 @@ const navConfig = [
       {
         title: 'Services',
          path: PATH_DASHBOARD.service.list,
-        icon: ICONS.user,
+        icon: ICONS.booking,
       },
 
     ],
